@@ -1,10 +1,7 @@
 package guru.springframework.web.aplication.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +11,8 @@ import java.util.Set;
 @Builder
 @EqualsAndHashCode(of="id")
 @Entity
+@Getter
+@Setter
 public class Author {
 
     @Id
@@ -22,6 +21,6 @@ public class Author {
     private String firstName;
     private String lastName;
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> books  = new HashSet<>();
+    private Set<Book> books;
 
 }
