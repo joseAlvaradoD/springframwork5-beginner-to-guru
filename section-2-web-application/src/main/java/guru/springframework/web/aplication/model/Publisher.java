@@ -1,10 +1,10 @@
 package guru.springframework.web.aplication.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,4 +23,8 @@ public class Publisher {
     private String city;
     private String state;
     private String zip;
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    @Builder.Default
+    private Set<Book> books = new HashSet<>();
 }

@@ -33,16 +33,6 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Author eric = Author.builder()
-                .firstName("Eric")
-                .lastName("Evans")
-                .books(new HashSet<>())
-                .build();
-        Book ddd = Book.builder()
-                .title("Domain Driven Design")
-                .isbn("1234-4464v")
-                .authors(new HashSet<>())
-                .build();
         Publisher publisher = Publisher.builder()
                 .name("Publisher")
                 .addressLine1("Camino a Mexico")
@@ -50,23 +40,33 @@ public class BootStrapData implements CommandLineRunner {
                 .state("Texas")
                 .zip("12345")
                 .build();
+        publisherRepository.save(publisher);
+        Author eric = Author.builder()
+                .firstName("Eric")
+                .lastName("Evans")
+                .build();
+        Book ddd = Book.builder()
+                .title("Domain Driven Design")
+                .isbn("1234-4464v")
+                .publisher(publisher)
+                .build();
+
 
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
 
         authorRepository.save(eric);
         bookRepository.save(ddd);
-        publisherRepository.save(publisher);
+
 
         Author rod = Author.builder()
                 .firstName("Rod")
                 .lastName("Johnson")
-                .books(new HashSet<>())
                 .build();
         Book noEJB = Book.builder()
                 .title("J2EE Development without EJB")
                 .isbn("3323158741559")
-                .authors(new HashSet<>())
+                .publisher(publisher)
                 .build();
 
         rod.getBooks().add(noEJB);
