@@ -11,6 +11,10 @@ public class Section3DependencyInjectionApplication {
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(Section3DependencyInjectionApplication.class, args);
 
+		PetController petController = ctx.getBean("petController", PetController.class);
+		System.out.println("--- The Best Pet is ---");
+		System.out.println(petController.whichPetIsTheBest());
+
 		System.out.println("---------Profile");
 		I18nController i18nController =
 				(I18nController)ctx.getBean("i18nController");
