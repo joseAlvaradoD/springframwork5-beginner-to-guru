@@ -1,9 +1,6 @@
 package guru.springframework.injection.dependency;
 
-import guru.springframework.injection.dependency.controllers.ConstructorInjectorController;
-import guru.springframework.injection.dependency.controllers.MyController;
-import guru.springframework.injection.dependency.controllers.PropertyInjectorController;
-import guru.springframework.injection.dependency.controllers.SetterInjectorController;
+import guru.springframework.injection.dependency.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +10,11 @@ public class Section3DependencyInjectionApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(Section3DependencyInjectionApplication.class, args);
+
+		System.out.println("---------Profile");
+		I18nController i18nController =
+				(I18nController)ctx.getBean("i18nController");
+		System.out.println(i18nController.sayHello());
 
 		System.out.println("---------Primary Bean");
 		MyController myController = (MyController) ctx.getBean("myController");
