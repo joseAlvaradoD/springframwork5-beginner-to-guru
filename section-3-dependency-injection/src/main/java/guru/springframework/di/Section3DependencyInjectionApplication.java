@@ -1,6 +1,8 @@
 package guru.springframework.di;
 
 import guru.springframework.di.controllers.*;
+import guru.springframework.di.services.PrototypeBean;
+import guru.springframework.di.services.SingletonBean;
 import guru.springframework.pets.controllers.PetController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,8 +23,7 @@ public class Section3DependencyInjectionApplication {
 		System.out.println(petController.whichPetIsTheBest());
 
 		System.out.println("---------Profile");
-		I18nController i18nController =
-				(I18nController)ctx.getBean("i18nController");
+		I18nController i18nController = (I18nController)ctx.getBean("i18nController");
 		System.out.println(i18nController.sayHello());
 
 		System.out.println("---------Primary Bean");
@@ -44,6 +45,20 @@ public class Section3DependencyInjectionApplication {
 		ConstructorInjectorController constructorInjectorController =
 				(ConstructorInjectorController)ctx.getBean("constructorInjectorController");
 		System.out.println(constructorInjectorController.getGreeting());
+
+		System.out.println("---------Singleton");
+		SingletonBean singletonBean = (SingletonBean)ctx.getBean(SingletonBean.class);
+		System.out.println(singletonBean.getMyScope());
+		SingletonBean singletonBean2 = (SingletonBean)ctx.getBean(SingletonBean.class);
+		System.out.println(singletonBean2.getMyScope());
+
+		System.out.println("---------Prototype");
+		PrototypeBean prototypeBean = (PrototypeBean) ctx.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean.getMyScope());
+		PrototypeBean prototypeBean2 = (PrototypeBean) ctx.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean2.getMyScope());
+
+
 	}
 
 }
