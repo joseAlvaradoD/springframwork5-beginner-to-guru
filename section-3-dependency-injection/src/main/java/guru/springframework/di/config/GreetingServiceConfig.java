@@ -6,11 +6,9 @@ import guru.springframework.di.services.*;
 import guru.springframework.pets.services.DogPetService;
 import guru.springframework.pets.services.PetService;
 import guru.springframework.pets.services.PetServiceFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 
+@ImportResource("classpath:sfg.config.xml")
 @Configuration
 public class GreetingServiceConfig {
 
@@ -52,11 +50,6 @@ public class GreetingServiceConfig {
     @Bean
     PrimaryGreetingService primaryGreetingService(){
         return new PrimaryGreetingService();
-    }
-
-    @Bean
-    ConstructorInjectedGreetingService constructorInjectedGreetingService(){
-        return new ConstructorInjectedGreetingService();
     }
 
     @Bean
