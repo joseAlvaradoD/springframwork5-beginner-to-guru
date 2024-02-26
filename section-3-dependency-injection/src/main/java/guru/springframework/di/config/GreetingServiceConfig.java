@@ -6,8 +6,10 @@ import guru.springframework.di.repositories.EnglishGreetingRepositoryImpl;
 import guru.springframework.di.services.*;
 import guru.springframework.pets.services.PetService;
 import guru.springframework.pets.services.PetServiceFactory;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 
+@EnableConfigurationProperties(SfgConstructorConfig.class)
 @ImportResource("classpath:sfg.config.xml")
 @Configuration
 public class GreetingServiceConfig {
