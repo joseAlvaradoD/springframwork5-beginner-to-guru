@@ -1,6 +1,7 @@
 package guru.springframework.di;
 
 import guru.springframework.di.controllers.*;
+import guru.springframework.di.datasource.FakeDataSource;
 import guru.springframework.di.services.PrototypeBean;
 import guru.springframework.di.services.SingletonBean;
 import guru.springframework.pets.controllers.PetController;
@@ -58,7 +59,11 @@ public class Section3DependencyInjectionApplication {
 		PrototypeBean prototypeBean2 = (PrototypeBean) ctx.getBean(PrototypeBean.class);
 		System.out.println(prototypeBean2.getMyScope());
 
-
+		System.out.println("---------FakeDataSource");
+		FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
+		System.out.println(fakeDataSource.getUsername());
+		System.out.println(fakeDataSource.getPassword());
+		System.out.println(fakeDataSource.getJdbcUrl());
 	}
 
 }
