@@ -2,6 +2,7 @@ package jjad.springframework.recipe.model;
 
 import jakarta.persistence.*;
 
+@Entity
 public class Notes {
 
     @Id
