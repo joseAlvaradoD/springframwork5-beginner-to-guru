@@ -4,6 +4,7 @@ import jjad.springframework.recipe.model.*;
 import jjad.springframework.recipe.repositories.CategoryRepository;
 import jjad.springframework.recipe.repositories.RecipeRepository;
 import jjad.springframework.recipe.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class RecipeBootstrap implements CommandLineRunner {
 
@@ -27,7 +29,9 @@ public class RecipeBootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        log.debug("running bootstrap data");
         recipeRepository.saveAll(getRecipes());
+        log.debug("finished bootstrap data");
     }
 
     private List<Recipe> getRecipes() {
