@@ -4,6 +4,7 @@ import jjad.springframework.recipe.model.Recipe;
 import jjad.springframework.recipe.services.RecipesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
@@ -35,12 +36,13 @@ class IndexControllerTest {
         recipes.add(recipe);
 
         when(recipesService.getRecipes()).thenReturn(recipes);
-        when(model.getAttribute("recipes")).thenReturn(recipes);
+        ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
+
         String returnedValue = indexController.index(model);
 
         assertEquals(returnedValue, "index");
-        assertEquals(((Set<Recipe>)model.getAttribute("recipes")).size(), 1);
         verify(recipesService, times(1)).getRecipes();
-        verify(model, times(1)).addAttribute("recipes", recipes);
+        verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
+        assertEquals(1, argumentCaptor.getValue().size());
     }
 }
