@@ -1,6 +1,5 @@
 package jjad.springframework.recipe.repositories;
 
-import jjad.springframework.recipe.model.Category;
 import jjad.springframework.recipe.model.UnitOfMeasure;
 import org.springframework.data.repository.CrudRepository;
 
