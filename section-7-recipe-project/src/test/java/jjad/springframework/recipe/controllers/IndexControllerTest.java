@@ -1,7 +1,7 @@
 package jjad.springframework.recipe.controllers;
 
 import jjad.springframework.recipe.model.Recipe;
-import jjad.springframework.recipe.services.RecipesService;
+import jjad.springframework.recipe.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -24,7 +24,7 @@ class IndexControllerTest {
 
     IndexController indexController;
     @Mock
-    RecipesService recipesService;
+    RecipeService recipesService;
     @Mock
     Model model;
 
