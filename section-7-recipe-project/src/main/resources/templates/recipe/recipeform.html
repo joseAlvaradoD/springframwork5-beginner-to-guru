@@ -22,7 +22,7 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form  th:object="${recipe}" th:action="@{/recipe/}"  method="post">
+            <form  th:object="${recipe}" th:action="@{/recipe}"  method="post">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="panel-group">
                     <div class="panel panel-primary">
@@ -108,7 +108,7 @@
                                         <li th:remove="all">1 Teaspoon of chocolate</li>
                                         <li th:each="ingredient : ${recipe.ingredients}"
                                             th:text="${(ingredient.getAmount() +
-                                        ' ' + ingredient.uom.getDescription() +
+                                        ' ' + ingredient.unitOfMeasure.getDescription() +
                                         ' - ' + ingredient.getDescription())}">1 Teaspoon of Sugar
                                         </li>
                                     </ul>
@@ -134,6 +134,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 form-group">
+                                    <input type="hidden" th:field="*{notes.id}"/>
                                     <textarea class="form-control" rows="3" th:field="*{notes.recipeNotes}"></textarea>
                                 </div>
                             </div>
