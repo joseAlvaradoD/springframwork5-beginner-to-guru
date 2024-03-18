@@ -1,13 +1,12 @@
 package jjad.springframework.recipe.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(exclude = "recipe")
 @NoArgsConstructor
 @Entity
