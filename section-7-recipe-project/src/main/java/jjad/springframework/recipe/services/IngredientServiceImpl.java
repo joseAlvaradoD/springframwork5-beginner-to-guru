@@ -5,6 +5,7 @@ import jjad.springframework.recipe.converters.IngredientCommandToIngredient;
 import jjad.springframework.recipe.converters.IngredientToIngredientCommand;
 import jjad.springframework.recipe.model.Ingredient;
 import jjad.springframework.recipe.model.Recipe;
+import jjad.springframework.recipe.repositories.IngredientRepository;
 import jjad.springframework.recipe.repositories.RecipeRepository;
 import jjad.springframework.recipe.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +21,14 @@ public class IngredientServiceImpl implements IngredientService{
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
     private final RecipeRepository recipeRepository;
+    private final IngredientRepository ingredientRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
 
-    public IngredientServiceImpl(IngredientToIngredientCommand ingredientToIngredientCommand, IngredientCommandToIngredient ingredientCommandToIngredient, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
+    public IngredientServiceImpl(IngredientToIngredientCommand ingredientToIngredientCommand, IngredientCommandToIngredient ingredientCommandToIngredient, RecipeRepository recipeRepository, IngredientRepository ingredientRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
         this.ingredientToIngredientCommand = ingredientToIngredientCommand;
         this.ingredientCommandToIngredient = ingredientCommandToIngredient;
         this.recipeRepository = recipeRepository;
+        this.ingredientRepository = ingredientRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
     }
 
@@ -106,6 +109,12 @@ public class IngredientServiceImpl implements IngredientService{
             return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
         }
 
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        ingredientRepository.deleteById(id);
     }
 
 }

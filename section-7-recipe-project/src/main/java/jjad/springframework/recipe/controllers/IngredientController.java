@@ -7,7 +7,6 @@ import jjad.springframework.recipe.services.IngredientService;
 import jjad.springframework.recipe.services.RecipeService;
 import jjad.springframework.recipe.services.UnitOfMeasureService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,5 +81,14 @@ public class IngredientController {
         log.debug("saved ingredient id:" + savedCommand.getId());
 
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+    }
+
+    @GetMapping("recipe/{recipeId}/ingredient/{id}/delete")
+    public String delete(@PathVariable String recipeId,
+                         @PathVariable String id){
+
+        ingredientService.deleteById(Long.valueOf(id));
+
+        return "redirect:/recipe/" + recipeId + "/ingredients";
     }
 }

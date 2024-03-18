@@ -7,6 +7,7 @@ import jjad.springframework.recipe.converters.UnitOfMeasureCommandToUnitOfMeasur
 import jjad.springframework.recipe.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import jjad.springframework.recipe.model.Ingredient;
 import jjad.springframework.recipe.model.Recipe;
+import jjad.springframework.recipe.repositories.IngredientRepository;
 import jjad.springframework.recipe.repositories.RecipeRepository;
 import jjad.springframework.recipe.repositories.UnitOfMeasureRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,6 +32,9 @@ class IngredientServiceImplTest {
     @Mock
     UnitOfMeasureRepository unitOfMeasureRepository;
 
+    @Mock
+    IngredientRepository ingredientRepository;
+
     IngredientService ingredientService;
 
     //init converters
@@ -44,7 +48,7 @@ class IngredientServiceImplTest {
         MockitoAnnotations.initMocks(this);
 
         ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient,
-                recipeRepository, unitOfMeasureRepository);
+                recipeRepository, ingredientRepository, unitOfMeasureRepository);
     }
 
     @Test
@@ -80,6 +84,15 @@ class IngredientServiceImplTest {
         assertEquals(Long.valueOf(3L), ingredientCommand.getId());
         assertEquals(Long.valueOf(1L), ingredientCommand.getRecipeId());
         verify(recipeRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    public void deleteById(){
+        Long idToDelete = 2L;
+
+        ingredientRepository.deleteById(idToDelete);
+
+        verify(ingredientRepository, times(1)).deleteById(anyLong());
     }
 
 }
