@@ -42,7 +42,7 @@ class RecipesServiceImplTest {
         NotFoundException thrown = assertThrows(
                 NotFoundException.class,
                 () -> recipeService.findById(1L),
-                "Recipe Not Found!"
+                contains("Recipe Not Found. For ID value:")
         );
     }
 
