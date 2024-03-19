@@ -77,7 +77,7 @@ public class RecipeController {
         ModelAndView modelAndView = new ModelAndView();
 
         modelAndView.setViewName("400error");
-        modelAndView.addObject("exception", exception);
+        modelAndView.addObject("errorMessage", exception.getMessage());
 
         return modelAndView;
     }
