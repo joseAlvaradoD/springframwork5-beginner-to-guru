@@ -2,6 +2,7 @@ package jjad.springframework.recipe.services;
 
 import jjad.springframework.recipe.converters.RecipeCommandToRecipe;
 import jjad.springframework.recipe.converters.RecipeToRecipeCommand;
+import jjad.springframework.recipe.exception.NotFoundException;
 import jjad.springframework.recipe.model.Recipe;
 import jjad.springframework.recipe.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,6 +31,19 @@ class RecipesServiceImplTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
+    }
+
+    @Test
+    public void getRecipeByIdTestNotFound()throws Exception{
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        NotFoundException thrown = assertThrows(
+                NotFoundException.class,
+                () -> recipeService.findById(1L),
+                contains("Recipe Not Found. For ID value:")
+        );
     }
 
     @Test
